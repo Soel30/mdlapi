@@ -26,6 +26,9 @@ class FetchDrama(BaseFetch):
         self.info["rating"] = self._handle_rating(
             container.find("div", class_="col-film-rating").find("div")
         )
+        
+        trailer_id = container.find("div", class_="m-b-sm mdl-component").find("button")
+        self.info["trailer_id"] = trailer_id["data-video-id"] if trailer_id else None
 
         # POSTER
         self.info["poster"] = self._get_poster(container)
@@ -45,7 +48,8 @@ class FetchDrama(BaseFetch):
                     "name": __temp_cast.find("b").text.strip(),
                     "profile_image": self._get_poster(i),
                     "slug": __temp_cast_slug,
-                    "link": urljoin(MYDRAMALIST_WEBSITE, __temp_cast_slug),
+                    "
+                    ": urljoin(MYDRAMALIST_WEBSITE, __temp_cast_slug),
                 }
             )
         self.info["casts"] = casts
