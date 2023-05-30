@@ -52,8 +52,8 @@ class FetchDrama(BaseFetch):
                     "name": __temp_cast.find("b").text.strip(),
                     "profile_image": self._get_poster(i),
                     "slug": __temp_cast_slug,
-                    "
-                    ": urljoin(MYDRAMALIST_WEBSITE, __temp_cast_slug),
+                    "link": urljoin(MYDRAMALIST_WEBSITE, __temp_cast_slug),
+
                 }
             )
         self.info["casts"] = casts
