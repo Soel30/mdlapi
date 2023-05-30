@@ -27,11 +27,9 @@ class FetchDrama(BaseFetch):
             container.find("div", class_="col-film-rating").find("div")
         )
         
-        # trailer_id = container.find("div", class_="m-b-sm mdl-component").find("button")
-        # self.info["trailer_id"] = trailer_id["data-video-id"] if trailer_id else None
-
+ 
         # TRAILER
-        trailer_id = container.find("button", class_="btn-trailer btn white btn-block")
+        trailer_id = container.select("btn-trailer btn white btn-block")
         self.info["trailer_id"] = trailer_id["data-video-id"] if trailer_id else None        
 
         # POSTER
