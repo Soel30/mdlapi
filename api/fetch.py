@@ -35,7 +35,7 @@ class FetchDrama(BaseFetch):
         # else, set to None
         trailer_id = container.find_all("button", class_="btn-trailer btn white btn-block")
         trailer_id = trailer_id[0] if trailer_id else None
-        trailer_id = trailer_id["data-video-id"] if trailer_id else None
+        trailer_id = trailer_id if trailer_id else None
         self.info["trailer_id"] = trailer_id     
 
         # POSTER
