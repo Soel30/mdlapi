@@ -33,8 +33,10 @@ class FetchDrama(BaseFetch):
         # find button with class btn-trailer
         # if found, get the data-video-id attribute
         # else, set to None
-        trailer_id = container.find("div", class_="m-b-sm mdl-component").find("button", class_="btn-trailer")
-        self.info["trailer_id"] = trailer_id["data-video-id"] if trailer_id else None        
+        trailer_id = container.find_all("button", class_="btn-trailer btn white btn-block")
+        trailer_id = trailer_id[0] if trailer_id else None
+        trailer_id = trailer_id["data-video-id"] if trailer_id else None
+        self.info["trailer_id"] = trailer_id     
 
         # POSTER
         self.info["poster"] = self._get_poster(container)
