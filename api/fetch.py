@@ -26,18 +26,15 @@ class FetchDrama(BaseFetch):
         self.info["rating"] = self._handle_rating(
             container.find("div", class_="col-film-rating").find("div")
         )
-        
- 
-        # TRAILER
-        # trailer_id =
-        # find button with class btn-trailer
-        # if found, get the data-video-id attribute
-        # else, set to None
-        trailer_id = container.find("div", class_="m-b-sm mdl-component").find("button")
-        if trailer_id:
-            self.info["trailer_id"] = trailer_id["data-id"]
+
+        # TRAILER ID
+        trailer_id = container.find("div", class_="m-b-sm mdl-component")
+        if trailer_id is not None:
+            trailer_id = trailer_id.find('button')["data-id"]
+            self.info["trailer_id"] = trailer_id
         else:
             self.info["trailer_id"] = None
+        
 
         # POSTER
         self.info["poster"] = self._get_poster(container)
