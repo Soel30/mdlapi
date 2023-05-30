@@ -20,20 +20,19 @@ class FetchDrama(BaseFetch):
         # these are the most important drama infos / details
 
         # TITLE
-        # Example: Goblin (2016)
-        # Title = Goblin
-        # Complete Title = Goblin (2016)
-        film_title = container.find("h1", class_="film-title")
-        self.info["title"] = film_title.find("a").get_text().strip()
-        self.info["complete_title"] = film_title.get_text().strip()
+        self.info["title"] = container.find("h1", class_="film-title").find("a").text
 
         # RATING (could be either N/A or with number)
         self.info["rating"] = self._handle_rating(
             container.find("div", class_="col-film-rating").find("div")
         )
         
-        trailer_id = container.find("div", class_="m-b-sm mdl-component").find("button")
-        self.info["trailer_id"] = trailer_id["data-video-id"] if trailer_id else None
+        # trailer_id = container.find("div", class_="m-b-sm mdl-component").find("button")
+        # self.info["trailer_id"] = trailer_id["data-video-id"] if trailer_id else None
+
+        # TRAILER
+        trailer_id = container.find("button", class_="btn-trailer btn white btn-block")
+        self.info["trailer_id"] = trailer_id["data-video-id"] if trailer_id else None        
 
         # POSTER
         self.info["poster"] = self._get_poster(container)
